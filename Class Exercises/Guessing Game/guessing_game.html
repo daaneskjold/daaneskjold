@@ -1,9 +1,110 @@
 <!DOCTYPE html>
 <head>
+	<title>The Basketball Game!! by Marcelino briseno</title>
 </head>
 <body>
-	<script type="text/javascript">
+	<h1>The Basketball Game!</h1>
+	<img src='https://mentesenaccion.files.wordpress.com/2011/04/slam_dunk.jpg'/>
+	<h2>START!</h2>
+	<script type="text/javascript" name='BasketballGame'>
 		var userName = prompt('Please type your name');
-		alert('Thanks John. You said your name was John right?');
+		var userAnswer;
+		var questionCounter = 0;
+		var correctGuess = false;
+		var favoriteTeam;
+		//east
+		var atlanticDiv = ['Boston Celtics','Brooklyn Nets','New York Knicks','Philadelphia 76ers','Toronto Raptors'];
+		var centralDiv = ['Chicago Bulls', 'Cleveland Cavaliers', 'Detroit Pistons', 'Indiana Pacers', 'Milwaukee Bucks'];
+		var southeastDiv = ['Atlanta Hawks', 'Charlotte Hornets', 'Miami Heat', 'Orlando Magic', 'Washington Wizards '];
+		//west
+		var southwestDiv = ['Dallas Mavericks', 'Houston Rockets', 'Memphis Grizzlies', 'New Orleans Pelicans', 'San Antonio Spurs'];
+		var northwestDiv = ['Denver Nuggets', 'Minnesota Timberwolves', 'Portland Trail Blazers', 'Oklahoma City Thunder', 'Utah Jazz'];
+		var pacificDiv = ['Golden State Warriors', 'Los Angeles Clippers', 'Los Angeles Lakers', 'Phoenix Suns', 'Sacramento Kings'];
+
+
+		var evaluate_question = function(question_text){
+			userAnswer = 'lol';
+			do{
+				userAnswer = prompt('Question #' + questionCounter.toString() + ' ' + question_text + ' (Y/N)');
+			}while(userAnswer.toUpperCase()!=='Y'&&userAnswer.toUpperCase()!=='N');
+			questionCounter ++;
+			return userAnswer;
+		}
+
+		var division_loop = function(division){
+			var i=0;
+			while(correctGuess===false&&i<division.length){
+				evaluate_question('Is your team the ' + division[i] +'?');
+				if(userAnswer.toUpperCase()==='Y'){
+					correctGuess=true;
+					favoriteTeam=division[i];
+				}
+				i++;
+			}
+			if(favoriteTeam==='Miami Heat'){
+				alert('You got it! Hi5!');
+			}
+			return favoriteTeam;
+		}
+
+		alert('Thanks ' + userName + '! Welcome to "Your favorite NBA team". In this game, I will try to guess your favorite NBA team in 10 questions or less.');
+		evaluate_question('You just have to answer to some of my questions! Are you ready?');
+
+		evaluate_question('Is your team in the Eastern Conference?');
+		if(userAnswer.toUpperCase()==='Y'){
+			alert('Good job my friend!');
+			evaluate_question('Is it in the Atlantic Division?');
+			if(userAnswer.toUpperCase()==='Y'){
+				division_loop(atlanticDiv);
+			}
+			else
+			{
+				evaluate_question('Is it in the Central Division?');
+				if(userAnswer.toUpperCase()==='Y'){
+					division_loop(centralDiv);
+				}
+				else{
+					alert('Heading the right way!');
+					division_loop(southeastDiv);
+				}
+			}
+			
+		}
+		//Western
+		else{
+			evaluate_question('Is it in the Southwest Division?');
+			if(userAnswer.toUpperCase()==='Y'){
+				division_loop(southwestDiv);
+			}
+			else
+			{
+				evaluate_question('Is it in the Northwest Division?');
+				if(userAnswer.toUpperCase()==='Y'){
+					division_loop(northwestDiv);
+				}
+				else{
+					division_loop(pacificDiv);
+				}
+			}
+		}
+
+		if(correctGuess===true){
+			alert('I knew it! your team is the ' + favoriteTeam);
+			alert('Now, the hard part. The real game.');
+			favoriteTeam = prompt('What is MY favorite team?');
+			if(favoriteTeam.toUpperCase() === 'MIAMI HEAT'||favoriteTeam.toUpperCase() === 'MIAMI'||favoriteTeam.toUpperCase() === 'HEAT'){
+				alert('You won! Girls, beach, fun! What else can one man ask for :P');
+				alert('Thanks for playing! Hope you enjoyed this.');
+			}
+			else{
+				alert('Wrong anser! YOU LOSE!');
+				alert("Please try again :)");
+			}
+		}
+		else{
+			alert("Man, you are good, I couldn't guess it!");
+			alert("But guess what. You lost!!");
+			alert("Please try again :)");
+		}
 	</script>
 </body>
