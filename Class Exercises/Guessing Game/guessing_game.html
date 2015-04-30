@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <head>
-	<title>The Basketball Game!! by Marcelino briseno</title>
+	<title>The Basketball Game!! by Marcelino Briseno</title>
 </head>
 <body>
 	<h1>The Basketball Game!</h1>
 	<img src='https://mentesenaccion.files.wordpress.com/2011/04/slam_dunk.jpg'/>
-	<h2>START!</h2>
-	<script type="text/javascript" name='BasketballGame'>
+	<h2><a href="#" onclick="basketballGame()">START!</a></h2>
+	
+</body>
+
+<script type="text/javascript" name='basketballGame'>
+function basketballGame() {
 		var userName = prompt('Please type your name');
-		var userAnswer;
-		var questionCounter = 0;
+		var userAnswer="";
+		var questionCounter = 1;
 		var correctGuess = false;
 		var favoriteTeam;
 		//east
@@ -48,7 +52,9 @@
 		}
 
 		alert('Thanks ' + userName + '! Welcome to "Your favorite NBA team". In this game, I will try to guess your favorite NBA team in 10 questions or less.');
-		evaluate_question('You just have to answer to some of my questions! Are you ready?');
+		while(userAnswer.toUpperCase()!=='Y'){
+			userAnswer=prompt('You just have to answer to some of my questions! Are you ready? (Y/N)');
+		}
 
 		evaluate_question('Is your team in the Eastern Conference?');
 		if(userAnswer.toUpperCase()==='Y'){
@@ -106,5 +112,5 @@
 			alert("But guess what. You lost!!");
 			alert("Please try again :)");
 		}
+	}
 	</script>
-</body>

@@ -31,8 +31,8 @@ h1 {
     border-left: 1px solid #bcbdc0;
     border-right: 1px solid #bcbdc0;
     background-color: :red;
-    animation-name:example1;
-    animation-duration:4s;}
+    animation: example1 2s infinite linear;
+}
 
 h3 {
     margin: 0 0 0 50px;
