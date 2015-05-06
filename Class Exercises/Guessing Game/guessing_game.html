@@ -1,116 +1,136 @@
 <!DOCTYPE html>
-<head>
-	<title>The Basketball Game!! by Marcelino Briseno</title>
-</head>
-<body>
-	<h1>The Basketball Game!</h1>
-	<img src='https://mentesenaccion.files.wordpress.com/2011/04/slam_dunk.jpg'/>
-	<h2><a href="#" onclick="basketballGame()">START!</a></h2>
-	
-</body>
+<html>
+	<head>
 
-<script type="text/javascript" name='basketballGame'>
-function basketballGame() {
-		var userName = prompt('Please type your name');
-		var userAnswer="";
-		var questionCounter = 1;
-		var correctGuess = false;
-		var favoriteTeam;
-		//east
-		var atlanticDiv = ['Boston Celtics','Brooklyn Nets','New York Knicks','Philadelphia 76ers','Toronto Raptors'];
-		var centralDiv = ['Chicago Bulls', 'Cleveland Cavaliers', 'Detroit Pistons', 'Indiana Pacers', 'Milwaukee Bucks'];
-		var southeastDiv = ['Atlanta Hawks', 'Charlotte Hornets', 'Miami Heat', 'Orlando Magic', 'Washington Wizards '];
-		//west
-		var southwestDiv = ['Dallas Mavericks', 'Houston Rockets', 'Memphis Grizzlies', 'New Orleans Pelicans', 'San Antonio Spurs'];
-		var northwestDiv = ['Denver Nuggets', 'Minnesota Timberwolves', 'Portland Trail Blazers', 'Oklahoma City Thunder', 'Utah Jazz'];
-		var pacificDiv = ['Golden State Warriors', 'Los Angeles Clippers', 'Los Angeles Lakers', 'Phoenix Suns', 'Sacramento Kings'];
+		<title>The Basketball Game!! by Marcelino Briseno</title>
+
+	</head>
+	<body>
+		<h1>The Basketball Game!</h1>
+		<img src='https://mentesenaccion.files.wordpress.com/2011/04/slam_dunk.jpg'/>
+		<h2><a href="#" onclick="basketballGame()">START!</a></h2>
+		<header>A little bit about the creator</header>
+		<article>Hi! My name is Marcelino Briseno
+			<section>
+			I am mexican. I have been living in Seattle for over a year now. I am 29 years old. I work as a SDET for a subcontracting company and my current client is Nordstrom. More specifically, I am working in the eCommerce web team, in an independent unit that does all the platform transitions to newer, cooler, better architecture / technologies.
+			</section>
+			<section>
+				Most of my IT experience is as a .net developer. I like to think that am pretty decent at C#. But part of my current position involves interacting with a lot of design and front-end devs. And I noticed that I really, really like it! So, since I am still working and I would like some good foundations for this, I asked around and that is how I ended joining CodeFellows! I really hope to do the transition to full front end development side in the future! (during this or next year :P)
+			</section>
+			<aside>
+				On a side-uninteresting note. I'm not an IT graduate. My degree is in Mechanical Engineer. I like doing a lot of design and 3D modeling in that area. But the pay is not good. The hours are long. And I want to enjoy my life. And I have always loved programming. So that has me here, pretty much :) IT has given me the chance to do what I like, and enjoy what I do! It is not always great but so far, it has been an awesome ride!
+			<aside>
+				About the game. I am a huge basketball fan (and anime fan but that is other story). And I love the Miami Heat. The game takes you through a few paths depending on what you choose, and if you choose the path that will eventually lead you to my favorite team (the Miami Heat), on every layer you get an alert message with some encouraging -you are going through the right path- texts, that are different from all other paths which eventually show nothing. I think it adds a nice twist, because the actual game is not me guessing the team (which is pointless), is YOU going through the right flow.
+				The bad thing? It has no replayability once you figured out the answer, which you can do immediatly just by looking at the code :P . Anyway! Just an example lol.
+			</aside>
+		</article>
+		<footer>End of the bio XD</footer>
+
+	</body>
+
+	<script type="text/javascript" name='basketballGame'>
+	function basketballGame() {
+			var userName = prompt('Please type your name');
+			var userAnswer="";
+			var questionCounter = 1;
+			var correctGuess = false;
+			var favoriteTeam;
+			//east
+			var atlanticDiv = ['Boston Celtics','Brooklyn Nets','New York Knicks','Philadelphia 76ers','Toronto Raptors'];
+			var centralDiv = ['Chicago Bulls', 'Cleveland Cavaliers', 'Detroit Pistons', 'Indiana Pacers', 'Milwaukee Bucks'];
+			var southeastDiv = ['Atlanta Hawks', 'Charlotte Hornets', 'Miami Heat', 'Orlando Magic', 'Washington Wizards '];
+			//west
+			var southwestDiv = ['Dallas Mavericks', 'Houston Rockets', 'Memphis Grizzlies', 'New Orleans Pelicans', 'San Antonio Spurs'];
+			var northwestDiv = ['Denver Nuggets', 'Minnesota Timberwolves', 'Portland Trail Blazers', 'Oklahoma City Thunder', 'Utah Jazz'];
+			var pacificDiv = ['Golden State Warriors', 'Los Angeles Clippers', 'Los Angeles Lakers', 'Phoenix Suns', 'Sacramento Kings'];
 
 
-		var evaluate_question = function(question_text){
-			userAnswer = 'lol';
-			do{
-				userAnswer = prompt('Question #' + questionCounter.toString() + ' ' + question_text + ' (Y/N)');
-			}while(userAnswer.toUpperCase()!=='Y'&&userAnswer.toUpperCase()!=='N');
-			questionCounter ++;
-			return userAnswer;
-		}
+			var evaluate_question = function(question_text){
+				userAnswer = 'lol';
+				do{
+					userAnswer = prompt('Question #' + questionCounter.toString() + ' ' + question_text + ' (Y/N)');
+				}while(userAnswer.toUpperCase()!=='Y'&&userAnswer.toUpperCase()!=='N');
+				questionCounter ++;
+				return userAnswer;
+			}
 
-		var division_loop = function(division){
-			var i=0;
-			while(correctGuess===false&&i<division.length){
-				evaluate_question('Is your team the ' + division[i] +'?');
-				if(userAnswer.toUpperCase()==='Y'){
-					correctGuess=true;
-					favoriteTeam=division[i];
+			var division_loop = function(division){
+				var i=0;
+				while(correctGuess===false&&i<division.length){
+					evaluate_question('Is your team the ' + division[i] +'?');
+					if(userAnswer.toUpperCase()==='Y'){
+						correctGuess=true;
+						favoriteTeam=division[i];
+					}
+					i++;
 				}
-				i++;
+				if(favoriteTeam==='Miami Heat'){
+					alert('You got it! Hi5!');
+				}
+				return favoriteTeam;
 			}
-			if(favoriteTeam==='Miami Heat'){
-				alert('You got it! Hi5!');
+
+			alert('Thanks ' + userName + '! Welcome to "Your favorite NBA team". In this game, I will try to guess your favorite NBA team in 10 questions or less.');
+			while(userAnswer.toUpperCase()!=='Y'){
+				userAnswer=prompt('You just have to answer to some of my questions! Are you ready? (Y/N)');
 			}
-			return favoriteTeam;
-		}
 
-		alert('Thanks ' + userName + '! Welcome to "Your favorite NBA team". In this game, I will try to guess your favorite NBA team in 10 questions or less.');
-		while(userAnswer.toUpperCase()!=='Y'){
-			userAnswer=prompt('You just have to answer to some of my questions! Are you ready? (Y/N)');
-		}
-
-		evaluate_question('Is your team in the Eastern Conference?');
-		if(userAnswer.toUpperCase()==='Y'){
-			alert('Good job my friend!');
-			evaluate_question('Is it in the Atlantic Division?');
+			evaluate_question('Is your team in the Eastern Conference?');
 			if(userAnswer.toUpperCase()==='Y'){
-				division_loop(atlanticDiv);
-			}
-			else
-			{
-				evaluate_question('Is it in the Central Division?');
+				alert('Good job my friend!');
+				evaluate_question('Is it in the Atlantic Division?');
 				if(userAnswer.toUpperCase()==='Y'){
-					division_loop(centralDiv);
+					division_loop(atlanticDiv);
+				}
+				else
+				{
+					evaluate_question('Is it in the Central Division?');
+					if(userAnswer.toUpperCase()==='Y'){
+						division_loop(centralDiv);
+					}
+					else{
+						alert('Heading the right way!');
+						division_loop(southeastDiv);
+					}
+				}
+
+			}
+			//Western
+			else{
+				evaluate_question('Is it in the Southwest Division?');
+				if(userAnswer.toUpperCase()==='Y'){
+					division_loop(southwestDiv);
+				}
+				else
+				{
+					evaluate_question('Is it in the Northwest Division?');
+					if(userAnswer.toUpperCase()==='Y'){
+						division_loop(northwestDiv);
+					}
+					else{
+						division_loop(pacificDiv);
+					}
+				}
+			}
+
+			if(correctGuess===true){
+				alert('I knew it! your team is the ' + favoriteTeam);
+				alert('Now, the hard part. The real game.');
+				favoriteTeam = prompt('What is MY favorite team?');
+				if(favoriteTeam.toUpperCase() === 'MIAMI HEAT'||favoriteTeam.toUpperCase() === 'MIAMI'||favoriteTeam.toUpperCase() === 'HEAT'){
+					alert('You won! Girls, beach, fun! What else can one man ask for :P');
+					alert('Thanks for playing! Hope you enjoyed this.');
 				}
 				else{
-					alert('Heading the right way!');
-					division_loop(southeastDiv);
+					alert('Wrong anser! YOU LOSE!');
+					alert("Please try again :)");
 				}
-			}
-			
-		}
-		//Western
-		else{
-			evaluate_question('Is it in the Southwest Division?');
-			if(userAnswer.toUpperCase()==='Y'){
-				division_loop(southwestDiv);
-			}
-			else
-			{
-				evaluate_question('Is it in the Northwest Division?');
-				if(userAnswer.toUpperCase()==='Y'){
-					division_loop(northwestDiv);
-				}
-				else{
-					division_loop(pacificDiv);
-				}
-			}
-		}
-
-		if(correctGuess===true){
-			alert('I knew it! your team is the ' + favoriteTeam);
-			alert('Now, the hard part. The real game.');
-			favoriteTeam = prompt('What is MY favorite team?');
-			if(favoriteTeam.toUpperCase() === 'MIAMI HEAT'||favoriteTeam.toUpperCase() === 'MIAMI'||favoriteTeam.toUpperCase() === 'HEAT'){
-				alert('You won! Girls, beach, fun! What else can one man ask for :P');
-				alert('Thanks for playing! Hope you enjoyed this.');
 			}
 			else{
-				alert('Wrong anser! YOU LOSE!');
+				alert("Man, you are good, I couldn't guess it!");
+				alert("But guess what. You lost!!");
 				alert("Please try again :)");
 			}
 		}
-		else{
-			alert("Man, you are good, I couldn't guess it!");
-			alert("But guess what. You lost!!");
-			alert("Please try again :)");
-		}
-	}
-	</script>
+		</script>
+	</html>
