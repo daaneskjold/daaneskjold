@@ -1,0 +1,10 @@
+var donut = function(store,minCustomers,maxCustomers,avgOrder){
+  this.store=location;
+  this.minCustomers=minCustomers;
+  this.maxCustomers=maxCustomers;
+  this.avgOrder=avgOrder;
+  this.donutsPerHour=function(minCustomers,maxCustomers,avgOrder){
+    var donutsPerHour = (maxCustomers+minCustomers)*avgOrder/2;
+    return donutsPerHour;
+  }
+}
