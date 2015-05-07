@@ -1,0 +1,12 @@
+adding a script within the html
+
+<script type="text/javascript" src="relativepath/filename" </script>
+
+
+object relationship
+- composition - creates its own internal objects, not accessible on their own - dependency
+- aggregation - makes use of other object - non dependant
+-
+
+Universal Modeling Language - UML Class Diagrams -- do research
+
