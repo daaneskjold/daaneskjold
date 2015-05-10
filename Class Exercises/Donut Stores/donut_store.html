@@ -2,9 +2,9 @@
   <head>
     <title>Chazz Donuts Dashboard</title>
   </head>
+
   <body>
     <h1> Chazz Donut Shop </h1>
-
     <table border="1px">
       <thead>
         <tr>
@@ -14,138 +14,20 @@
           <th>Average donuts per customer</th>
           <th>Open Hours</th>
           <th>Close Hours</th>
+          <th>Manager Panel</th>
         </tr>
       </thead>
-
       <tbody id='storeInfo'>
       </tbody>
     </table>
 
-    <p>
-
-    </p>
+    <p></p>
 
     <div id='report'></div>
 
+    <img src="http://4.bp.blogspot.com/-PkiOMS44Ulw/Tku8a9jfpwI/AAAAAAAAXZQ/qEMcczezQR8/s1600/voodoo-doll-doughnut.jpg" display="inline-block">
 
-    <!-- I leave this on automatic because I want all this info to be preloaded since part of it populates the page-->
-
-    <script type="text/javascript">
-        var donutStore = function(store,minCustomers,maxCustomers,avgOrder,openHour,closeHour){
-          this.store=store;
-          this.minCustomers=minCustomers;
-          this.maxCustomers=maxCustomers;
-          this.avgOrder=avgOrder;
-          this.openHour=openHour;
-          this.closeHour=closeHour;
-          this.donutsPerHour=function(){
-            var costumersPerHour = (Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers);
-            var donutsPerHour = Math.floor(costumersPerHour*this.avgOrder);
-            return [costumersPerHour,donutsPerHour];
-          }
-          this.donutsPerDay = function(){
-            var dayClientSummary = [];
-            var dayDonutSummary=  [];
-            var hourSummary;
-            var totalClient = 0;
-            var totalDonuts = 0;
-            var rowCounter = 0;
-            for(var i = this.openHour; i <= this.closeHour ; i++){
-              hourSummary = this.donutsPerHour();
-              totalClient += hourSummary[0];
-              totalDonuts += hourSummary[1];
-              dayClientSummary[rowCounter] = hourSummary[0];
-              dayDonutSummary[rowCounter] = hourSummary[1];
-              rowCounter++;
-            }
-            dayClientSummary[rowCounter] = totalClient;
-            dayDonutSummary[rowCounter] = totalDonuts;
-            return [dayClientSummary,dayDonutSummary];
-          }
-        }
-
-        var downtown = new donutStore('Downtown',8,43,4.5,10,20);
-        var capitolHill = new donutStore('Capitol Hill',4,37,2,7,23);
-        var southLake = new donutStore('South Lake Union',9,23,6.33,10,22);
-        var wedgewood = new donutStore('Wedgewood',2,28,1.25,0,24);
-        var ballard = new donutStore('Ballard',8,58,3.75,8,18);
-
-        var downtownDay = downtown.donutsPerDay();
-        var capitolHillDay = capitolHill.donutsPerDay();
-        var southLakeDay = southLake.donutsPerDay();
-        var wedgewoodDay = wedgewood.donutsPerDay();
-        var ballardDay = ballard.donutsPerDay();
-
-        var storearray=[downtown,capitolHill,southLake,wedgewood,ballard];
-
-        //Just to be sure, I do my console log :P
-
-        console.log('Downtown');
-        console.log(downtownDay[0],downtownDay[1]);
-        console.log('Capitol Hill');
-        console.log(capitolHillDay[0],capitolHillDay[1]);
-        console.log('South Lake');
-        console.log(southLakeDay[0],southLakeDay[1]);
-        console.log('Wedgewood');
-        console.log(wedgewoodDay[0],wedgewoodDay[1]);
-        console.log('Ballard');
-        console.log(ballardDay[0],ballardDay[1]);
-
-        function printStoreTable(element,index,array){
-          var myTable = document.getElementById('storeInfo');
-          myTable.innerHTML += '<tr><td>' + element.store + '</td><td>' + element.minCustomers + '</td><td>' + element.maxCustomers + '</td><td>' + element.avgOrder + '</td><td>' + element.openHour + '</td><td>' + element.closeHour + '</td><td><a href="#" onclick="printLocationTable(\'' + element.store + '\')"> View Daily Summary </a></td></tr>';
-        };
-
-        storearray.forEach(printStoreTable);
-
-      </script>
+    <script type="text/javascript" src="donut_store.js"></script>
 
   </body>
 </html>
-
-<!--this part is sort of dynamic since i populate another table based on what store we want to query, so i put this outside to work on click on a link-->
-
-<script type="text/javascript" name='printLocationTable'>
-  function printLocationTable(store){
-      var today = new Date();
-      console.log(store);
-      var myTable = document.getElementById('report');
-      myTable.innerHTML = '<table border="1px"><thead><tr><th id =\'currentLocation\'>Location</th></tr><tr><th id=\'currentDay\'></th></tr><tr><th>Hour</th><th>Customers</th><th>Donuts</th></tr></thead><tbody id=\'summaryInfo\'></tbody></table>';
-
-      myTable = document.getElementById('currentDay');
-      myTable.innerHTML = '<tr>' + (today.getMonth()+1) +'/'+ today.getDate() +'/'+ today.getFullYear()+'</tr>';
-
-      myTable = document.getElementById('currentLocation');
-      myTable.innerHTML = store;
-
-      switch(store.toLowerCase()){
-        case 'ballard':
-          populateSummary(ballardDay);
-          break;
-        case 'downtown':
-          populateSummary(downtownDay);
-          break;
-        case 'capitol hill':
-          populateSummary(capitolHillDay);
-          break;
-        case 'south lake union':
-          populateSummary(southLakeDay);
-          break;
-        case 'wedgewood':
-          populateSummary(wedgewoodDay);
-          break;
-      }
-
-      return this;
-  }
-
-  function populateSummary(summaryArray){
-    var mytable = document.getElementById('summaryInfo');
-    for(var i=0; i<(summaryArray[0].length-1);i++){
-      mytable.innerHTML += '<tr><td>'+ i.toString() +'</td><td>'+ summaryArray[0][i] + '</td><td>'+ summaryArray[1][i] + '</td></tr>';
-    }
-    mytable.innerHTML += '<tr><td><strong>TOTAL</strong></td><td>'+ summaryArray[0][i] + '</td><td>'+ summaryArray[1][i] + '</td></tr>';
-    return this;
-  }
-
-</script>
