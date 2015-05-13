@@ -44,7 +44,7 @@ var DonutMaster = function(){
   this.generateReport =function(store){
     var today = new Date();
       var myTable = document.getElementById('report');
-      myTable.innerHTML = '<table border="1px"><thead><tr><th colspan="3" id =\'currentLocation\'>Location</th></tr><tr><th>Date</th><th colspan="2" ' +
+      myTable.innerHTML = '<table class="locationReport"><thead><tr><th colspan="3" id =\'currentLocation\'>Location</th></tr><tr><th>Date</th><th colspan="2" ' +
       ' id=\'currentDay\'></th></tr><tr><th>Hour</th><th>Customers</th><th>Donuts</th></tr></thead><tbody id=\'summaryInfo\'></tbody></table>';
       myTable = document.getElementById('currentDay');
       myTable.innerHTML = '<tr>' + (today.getMonth()+1) +'/'+ today.getDate() +'/'+ today.getFullYear()+'</tr>';

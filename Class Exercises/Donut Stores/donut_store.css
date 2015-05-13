@@ -1,0 +1,48 @@
+body{
+  background-color: #e0f07a;
+  font-family: Arial;
+}
+
+h1{
+  text-align: center;
+  text-decoration: underline;
+  color:red;
+}
+
+table{
+  font-size: 12px;
+  background-color: white;
+  float:left;
+  margin:20px;
+  border:1px solid black;
+}
+
+table td{
+  border:1px solid black;
+}
+
+table th{
+  font-size: 14px;
+  background-color: blue;
+  color:white;
+  text-align: center;
+}
+
+#storeInfo {
+  font-family: Verdana;
+}
+
+.locationReport th{
+  font-size:12px;
+  background-color: orange;
+}
+
+img{
+  display: inline-block;
+  float:right;
+}
+
+a{
+  color:green;
+  text-decoration: none;
+}
