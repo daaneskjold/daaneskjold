@@ -74,10 +74,10 @@ donutMaster.addShop('Wedgewood',2,28,1.25,0,24);
 donutMaster.addShop('Ballard',8,58,3.75,8,18);
 
 function printStoreTable(element,index,array){
-var myTable = document.getElementById('storeInfo');
-myTable.innerHTML += '<tr><td>' + element.store + '</td><td>' + element.minCustomers + '</td><td>' + element.maxCustomers + '</td><td>' +
-element.avgOrder + '</td><td>' + element.openHour + '</td><td>' + element.closeHour +
-'</td><td><a href="#" onclick="donutMaster.generateReport(storeArray[' + index + '])"> View Daily Summary for this Location</a></td></tr>';
+  $('#storeInfo').append('<tr><td>' + element.store + '</td><td>' + element.minCustomers + ' -  '
+  + element.maxCustomers + '</td><td>' + element.avgOrder + '</td><td>' + element.openHour + ' to '
+  + element.closeHour + ' hrs.</td><td class="managerButton"><a href="#" onclick="donutMaster.generateReport(storeArray['
+  + index +'])"> View Daily Summary for this Location</a></td></tr>');
 };
 
 storeArray.forEach(printStoreTable);

@@ -1,0 +1,7 @@
+code debug w codepen
+
+jquery edit html attributs
+
+$(selector).attr('attribute','value');
+
+.animate() -- custom animations
