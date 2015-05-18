@@ -33,23 +33,6 @@ var DonutStore = function(store,minCustomers,maxCustomers,avgOrder,openHour,clos
     return [dayClientSummary,dayDonutSummary];
   };
   this.storeSummary = this.getDonutsPerDay();
-  this.generateSummaryHtmlTable = function(){
-    var today = new Date();
-    $('#report').append('<table class="locationReport" id="' + this.store + '"><thead><tr><th colspan="3" id =\'currentLocation\'>Location</th></tr><tr><th>Date</th><th colspan="2" ' +
-    ' id=\'currentDay\'></th></tr><tr><th>Hour</th><th>Customers</th><th>Donuts</th></tr></thead><tbody id=\'summaryInfo\'></tbody></table>');
-    $('#'+ this.store + ' #currentDay').append((today.getMonth()+1) +'/'+ today.getDate() + '/ '+ today.getFullYear());
-    $('#'+ this.store + ' #currentLocation').html(this.store);
-  };
-  this.generatedHtml = this.generateSummaryHtmlTable();
-  this.populateSummary = function(){
-    for(var i=0; i<(this.storeSummary[0].length-1);i++){
-         $('#'+ this.store + '>#summaryInfo').append('<tr><td>'+ i.toString() +'</td><td>'+ this.storeSummary[0][i] + '</td><td>'+ this.storeSummary[1][i] + '</td></tr>');
-      };
-      $('#'+ this.store + '>#summaryInfo').append('<tr><td><strong>TOTAL</strong></td><td><strong>'+ this.storeSummary[0][i] + '</strong></td><td><strong>'+ this.storeSummary[1][i] +
-      '</strong></td></tr>');
-      return this;
-  };
-  this.populatedSummaryHtml = this.populateSummary();
 };
 
 var DonutMaster = function(){
@@ -58,31 +41,43 @@ var DonutMaster = function(){
       storeArray.push(store);
   };
 
-  this.generateReport =function(storeLocation){
-    $('.locationReport').fadeOut('fast').delay(250);
-    $('#'+storeLocation).fadeIn('slow');
+  this.generateReport =function(store){
+    var today = new Date();
+      var myTable = document.getElementById('report');
+      myTable.innerHTML = '<table class="locationReport"><thead><tr><th colspan="3" id =\'currentLocation\'>Location</th></tr><tr><th>Date</th><th colspan="2" ' +
+      ' id=\'currentDay\'></th></tr><tr><th>Hour</th><th>Customers</th><th>Donuts</th></tr></thead><tbody id=\'summaryInfo\'></tbody></table>';
+      myTable = document.getElementById('currentDay');
+      myTable.innerHTML = '<tr>' + (today.getMonth()+1) +'/'+ today.getDate() +'/'+ today.getFullYear()+'</tr>';
+
+      myTable = document.getElementById('currentLocation');
+      myTable.innerHTML = store.store;
+
+      function populateSummary(summaryArray){
+        var mytable = document.getElementById('summaryInfo');
+        for(var i=0; i<(summaryArray[0].length-1);i++){
+          mytable.innerHTML += '<tr><td>'+ i.toString() +'</td><td>'+ summaryArray[0][i] + '</td><td>'+ summaryArray[1][i] + '</td></tr>';
+        };
+        mytable.innerHTML += '<tr><td><strong>TOTAL</strong></td><td><strong>'+ summaryArray[0][i] + '</strong></td><td><strong>'+ summaryArray[1][i] +
+        '</strong></td></tr>';
+        return this;
+      };
+
+      populateSummary(store.storeSummary);
   };
 }
 
 var donutMaster = new DonutMaster();
 donutMaster.addShop('Downtown',8,43,4.5,10,20);
-donutMaster.addShop('Capitol_Hill',4,37,2,7,23);
-donutMaster.addShop('South_Lake_Union',9,23,6.33,10,22);
+donutMaster.addShop('Capitol Hill',4,37,2,7,23);
+donutMaster.addShop('South Lake Union',9,23,6.33,10,22);
 donutMaster.addShop('Wedgewood',2,28,1.25,0,24);
 donutMaster.addShop('Ballard',8,58,3.75,8,18);
 
 function printStoreTable(element,index,array){
   $('#storeInfo').append('<tr><td>' + element.store + '</td><td>' + element.minCustomers + ' -  '
   + element.maxCustomers + '</td><td>' + element.avgOrder + '</td><td>' + element.openHour + ' to '
-  + element.closeHour + ' hrs.</td><td class="managerButton"><a href="#" onclick="donutMaster.generateReport(\''+element.store+'\')"> View Daily Summary for this Location</a></td></tr>');
+  + element.closeHour + ' hrs.</td><td class="managerButton"><a href="#" onclick="donutMaster.generateReport(storeArray['
+  + index +'])"> View Daily Summary for this Location</a></td></tr>');
 };
 
 storeArray.forEach(printStoreTable);
-
-$('.managerButton>a').hover(function() {
-    $(this).css('background-color','green');
-    $(this).css('color','white');
-    }, function() {
-    $(this).css('background-color','white');
-    $(this).css('color','green');
-});
